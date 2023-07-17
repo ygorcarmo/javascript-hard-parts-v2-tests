@@ -1,0 +1,15 @@
+{
+  "name": "javascript-hard-parts-v2-tests",
+  "version": "1.0.0",
+  "description": "Just a test suit for the examples used on JavaScript  Hard Parts v2 from FrontendMasters",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.6.1"
+  }
+}
