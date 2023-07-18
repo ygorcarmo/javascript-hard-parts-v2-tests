@@ -198,4 +198,20 @@ const highestFunc = (objOfFuncs, subject) => {
 // console.log(highestFunc(groupOfFuncs, 5)); // should log: 'addTen'
 // console.log(highestFunc(groupOfFuncs, 11)); // should log: 'double'
 // console.log(highestFunc(groupOfFuncs, -20)); // should log: 'inverse'
-module.exports = { addTwo, addS, map, forEach, mapWith, reduce, intersection };
+module.exports = {
+  addTwo,
+  addS,
+  map,
+  forEach,
+  mapWith,
+  reduce,
+  intersection,
+  union,
+  objOfMatches,
+  multiMap,
+  commutative,
+  objFilter,
+  rating,
+  pipe,
+  highestFunc,
+};
