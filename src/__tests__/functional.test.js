@@ -10,6 +10,10 @@ const {
   objOfMatches,
   multiMap,
   commutative,
+  objFilter,
+  rating,
+  pipe,
+  highestFunc,
 } = require("../functional");
 
 test("Challenge 1: accepts one input and adds 2 to it", () => {
@@ -112,4 +116,43 @@ test("Challenge 11: Create a function commutative that accepts two callbacks and
   expect(commutative(multBy3, divBy4, 11)).toBe(true);
   expect(commutative(multBy3, subtract5, 10)).toBe(false);
   expect(commutative(divBy4, subtract5, 48)).toBe(false);
+});
+
+test("Challenge 12: Create a function objFilter that accepts an object and a callback. objFilter should make a new object, and then iterate through the passed-in object, using each key as input for the callback. If the output from the callback is equal to the corresponding value, then that key-value pair is copied into the new object. objFilter will return this new object.", () => {
+  const startingObj = {};
+  startingObj[6] = 3;
+  startingObj[2] = 1;
+  startingObj[12] = 4;
+  const half = (n) => n / 2;
+
+  expect(objFilter(startingObj, half)).toStrictEqual({ 2: 1, 6: 3 });
+});
+
+test("Challenge 13: Create a function rating that accepts an array (of functions) and a value. All the functions in the array will return true or false. rating should return the percentage of functions from the array that return true when the value is used as input.", () => {
+  const isEven = (n) => n % 2 === 0;
+  const greaterThanFour = (n) => n > 4;
+  const isSquare = (n) => Math.sqrt(n) % 1 === 0;
+  const hasSix = (n) => n.toString().includes("6");
+  const checks = [isEven, greaterThanFour, isSquare, hasSix];
+
+  expect(rating(checks, 64)).toBe(100);
+  expect(rating(checks, 66)).toBe(75);
+});
+test("Challenge 14: Create a function pipe that accepts an array (of functions) and a value. pipe should input the value into the first function in the array, and then use the output from that function as input for the second function, and then use the output from that function as input for the third function, and so forth, until we have an output from the last function in the array. pipe should return the final output.", () => {
+  const capitalize = (str) => str.toUpperCase();
+  const addLowerCase = (str) => str + str.toLowerCase();
+  const repeat = (str) => str + str;
+  const capAddlowRepeat = [capitalize, addLowerCase, repeat];
+
+  expect(pipe(capAddlowRepeat, "cat")).toBe("CATcatCATcat");
+});
+test("Challenge 15: Create a function highestFunc that accepts an object (which will contain functions) and a subject (which is any value). highestFunc should return the key of the object whose associated value (which will be a function) returns the largest number, when the subject is given as input.", () => {
+  const groupOfFuncs = {};
+  groupOfFuncs.double = (n) => n * 2;
+  groupOfFuncs.addTen = (n) => n + 10;
+  groupOfFuncs.inverse = (n) => n * -1;
+
+  expect(highestFunc(groupOfFuncs, 5)).toBe("addTen");
+  expect(highestFunc(groupOfFuncs, 11)).toBe("double");
+  expect(highestFunc(groupOfFuncs, -20)).toBe("inverse");
 });
